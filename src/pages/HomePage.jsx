@@ -27,16 +27,6 @@ export default function HomePage() {
         />
       </section>
 
-      <section className="info-strip actionable-strip">
-        <div>
-          <strong>New for Milestone 5</strong>
-          <p className="muted">Browse all categories from the new Categories tab, or try “elephant” to see a semantic gap example.</p>
-        </div>
-        <button className="secondary-button small" onClick={() => navigate('/categories')}>
-          Open Categories
-        </button>
-      </section>
-
       <section className="section-block">
         <div className="section-heading">
           <div>
@@ -62,7 +52,6 @@ export default function HomePage() {
               </span>
               <strong>{topic.label}</strong>
               <p>{topic.description}</p>
-              {topic.semanticGapExamples?.length ? <span className="chip chip-soft">Includes semantic gap example</span> : null}
               {!topic.prototypeReady && <span className="chip chip-neutral">Prototype later</span>}
             </button>
           ))}
