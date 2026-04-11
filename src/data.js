@@ -53,7 +53,7 @@ export const WORDS = {
     topicIds: ['animals'],
     shortDefinition: 'large grey mammal',
     description:
-      'This is a semantic-gap example. Some English concepts do not have a direct one-to-one Cree translation, but can still be explored through related words.',
+      'This English concept does not have a direct one-to-one Cree translation.',
     example: '',
     pronunciation: '',
     audioLabel: '',
