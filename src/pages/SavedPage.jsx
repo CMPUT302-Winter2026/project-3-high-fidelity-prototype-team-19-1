@@ -56,7 +56,7 @@ export default function SavedPage() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search topics or saved words"
+              placeholder="Search topics"
             />
           </label>
           <button className="primary-button" onClick={() => setCreateOpen(true)}>

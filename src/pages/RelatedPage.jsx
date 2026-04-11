@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import AppShell from '../components/AppShell'
 import { getWord } from '../data'
 import { useApp } from '../AppContext'
+import Modal from '../components/Modal'
 
 function getDisplayText(word, displayLanguage) {
   const isCreeFirst = displayLanguage === 'cree'
@@ -41,6 +42,27 @@ export default function RelatedPage() {
   const displayLanguage = searchParams.get('lang') === 'cree' ? 'cree' : 'english'
   const { notify } = useApp()
   const [showAll, setShowAll] = useState(false)
+  const { savedTopics, saveWordToTopic } = useApp()
+
+  const [saveOpen, setSaveOpen] = useState(false)
+  const [selectedWord, setSelectedWord] = useState(null)
+  const [topicFilter, setTopicFilter] = useState('')
+  const [newTopicName, setNewTopicName] = useState('')
+
+  const handleAddToExisting = (topicId) => {
+    saveWordToTopic({ wordId: selectedWord.id, topicId })
+    setSaveOpen(false)
+    setTopicFilter('')
+    setNewTopicName('')
+  }
+
+  const handleCreateAndAdd = () => {
+    if (!newTopicName.trim()) return
+    saveWordToTopic({ wordId: selectedWord.id, topicName: newTopicName })
+    setSaveOpen(false)
+    setTopicFilter('')
+    setNewTopicName('')
+  }
 
   const word = getWord(wordId)
 
@@ -105,8 +127,7 @@ export default function RelatedPage() {
       <section className="section-card">
         <div className="section-header-inline">
           <div>
-            <h3>Nearby words</h3>
-            <p className="muted">This page is only for exploration. Saving now starts from the Details page.</p>
+            <h3>Related words</h3>
           </div>
           {allRelations.length > 4 ? (
             <button className="secondary-button small" onClick={() => setShowAll((value) => !value)}>
@@ -121,26 +142,95 @@ export default function RelatedPage() {
             return (
               <article key={relation.word.id} className="related-list-card">
                 <div>
-                  <div className="chip-row compact-chip-row">
-                    <span className="chip chip-soft">{relation.label}</span>
-                  </div>
+
                   <h3>{relationText.title}</h3>
                   {relationText.form ? <p className="cree-line">{relationText.form}</p> : null}
                   <p className="muted">{relationText.translation}</p>
                 </div>
                 <div className="card-actions vertical-actions related-actions">
-                  <Link className="primary-button small details-prominent" to={`/details/${relation.word.id}?lang=${displayLanguage}`}>
+                  <Link
+                    className="primary-button small details-prominent"
+                    to={`/details/${relation.word.id}?lang=${displayLanguage}`}
+                  >
                     Details
                   </Link>
-                  <Link className="secondary-button small" to={`/related/${relation.word.id}?lang=${displayLanguage}`}>
-                    Explore
-                  </Link>
+
+                  <button
+                    className="secondary-button small"
+                    onClick={() => {
+                      setSelectedWord(relation.word)
+                      setSaveOpen(true)
+                    }}
+                  >
+                    + Add to Topic
+                  </button>
                 </div>
               </article>
             )
           })}
         </div>
       </section>
+      {saveOpen && selectedWord && (
+  <Modal title="Save to Topic" onClose={() => setSaveOpen(false)} wide>
+    <div className="save-flow-block">
+      <div>
+        <strong>Add “{selectedWord.english}” to an existing topic</strong>
+        <p className="muted small-copy">Choose one list below, or create a new topic.</p>
+      </div>
+
+      <label className="inline-search-card">
+        <span className="search-icon">⌕</span>
+        <input
+          value={topicFilter}
+          onChange={(e) => setTopicFilter(e.target.value)}
+          placeholder="Search saved topics"
+        />
+      </label>
+
+      <div className="stack-list compact-stack">
+            {savedTopics.map((topic) => {
+              const alreadySaved = topic.words.includes(selectedWord.id)
+              return (
+                <div key={topic.id} className="selection-row save-topic-row">
+                  <div>
+                    <strong>{topic.name}</strong>
+                    <p className="muted small-copy">{topic.words.length} word(s)</p>
+                  </div>
+                  <button
+                    className={alreadySaved ? 'secondary-button small disabled-look' : 'primary-button small'}
+                    onClick={() => !alreadySaved && handleAddToExisting(topic.id)}
+                    disabled={alreadySaved}
+                  >
+                    {alreadySaved ? 'Added' : 'Add'}
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="save-flow-divider" />
+
+        <div className="save-flow-block">
+          <strong>Create a new topic</strong>
+
+          <input
+            value={newTopicName}
+            onChange={(e) => setNewTopicName(e.target.value)}
+            placeholder="My Animals"
+          />
+
+          <div className="modal-actions">
+            <button className="secondary-button" onClick={() => setSaveOpen(false)}>
+              Cancel
+            </button>
+            <button className="primary-button" onClick={handleCreateAndAdd}>
+              Create and add
+            </button>
+          </div>
+        </div>
+      </Modal>
+    )}
     </AppShell>
   )
 }
