@@ -44,11 +44,10 @@ export default function WordCard({ word, displayLanguage = 'english', onPlayAudi
       </div>
 
       <div className="card-actions split-actions">
-        <Link className="primary-button details-prominent" to={`/details/${word.id}?lang=${displayLanguage}`}>
+        <Link className="secondary-button details-prominent" to={`/details/${word.id}?lang=${displayLanguage}`}>
           Details
         </Link>
-
-        <Link className="secondary-button" to={`/related/${word.id}?lang=${displayLanguage}`}>
+        <Link className="primary-button" to={`/related/${word.id}?lang=${displayLanguage}`}>
           Related Words
         </Link>
       </div>

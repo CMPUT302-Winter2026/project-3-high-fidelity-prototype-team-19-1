@@ -39,7 +39,7 @@ export default function TopicGraph({ topic, words, expanded }) {
           x: 25,
           y: 74,
           kind: 'gap',
-          to: '/search?q=elephant',
+          to: '/related/elephant',
         },
         fish && { id: fish.id, word: fish, x: 75, y: 74, kind: 'primary', to: `/related/${fish.id}` },
       ].filter(Boolean)
