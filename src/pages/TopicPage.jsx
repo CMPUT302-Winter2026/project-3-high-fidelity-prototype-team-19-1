@@ -32,24 +32,12 @@ export default function TopicPage() {
 
       <section className="hero-card compact-card">
         <div className="explore-category">
-          <span>Tap a node to explore related words or open details.</span>
+          <span>Tap a node to explore related words.</span>
           <button className="secondary-button small" onClick={() => setExpanded((value) => !value)}>
             {expanded ? 'Show less' : 'Show more'}
           </button>
         </div>
       </section>
-
-      {topic.semanticGapExamples?.length ? (
-        <section className="info-strip actionable-strip">
-          <div>
-            <strong>Semantic gap example</strong>
-            <p className="muted">This topic includes “{topic.semanticGapExamples[0].label}” as a no-direct-translation example.</p>
-          </div>
-          <Link className="secondary-button small" to={`/search?q=${encodeURIComponent(topic.semanticGapExamples[0].query)}`}>
-            Open example
-          </Link>
-        </section>
-      ) : null}
     </AppShell>
   )
 }

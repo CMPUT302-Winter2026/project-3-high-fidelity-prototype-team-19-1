@@ -103,20 +103,14 @@ export default function SearchPage() {
           ) : null}
 
           <div className="recovery-buttons">
-            <button className="secondary-button" onClick={() => setQuery(initialQuery)}>
-              Check spelling
-            </button>
-            <button className="secondary-button" onClick={() => navigate('/topic/animals')}>
-              Browse Animals
-            </button>
+
             <button className="secondary-button" onClick={() => navigate('/categories')}>
               Browse Categories
             </button>
           </div>
 
-          <div className="closest-match-box">
-            <h3>Closest matches</h3>
             <div className="stack-list compact-stack">
+              <h3>Closest matches</h3>
               {closestMatches.map((word) => (
                 <WordCard
                   key={word.id}
@@ -126,7 +120,6 @@ export default function SearchPage() {
                 />
               ))}
             </div>
-          </div>
         </section>
       )}
     </AppShell>
