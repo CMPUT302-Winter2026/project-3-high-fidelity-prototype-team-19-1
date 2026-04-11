@@ -607,7 +607,7 @@ export const HELP_BY_ROUTE = {
     tips: [
       'Tap a node to explore that word.',
       'Use Show more to reveal extra nodes.',
-      'Words that do not have a translation are shown with a “No translation” label and a dashed circular outline.',
+      'Words that do not have a translation are shown with a “No direct translation” label and a dashed circular outline.',
     ],
   },
   categories: {
