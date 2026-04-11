@@ -30,7 +30,7 @@ export default function HomePage() {
       <section className="section-block">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Browse Topics</p>
+            <p className="eyebrow">Browse Categories</p>
             <h2>Start from a familiar theme</h2>
           </div>
         </div>

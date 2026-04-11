@@ -50,8 +50,7 @@ export default function CategoriesPage() {
       {/* 🔍 YOUR ORIGINAL STYLE SEARCH (NOT homepage one) */}
       <section className="hero-card compact-card">
         <div>
-          <p className="eyebrow">Browse all topics</p>
-          <h2>Find a category</h2>
+          <p className="eyebrow">Find a category</p>
         </div>
 
         <label className="inline-search-card" aria-label="Search categories">
@@ -64,11 +63,9 @@ export default function CategoriesPage() {
         </label>
       </section>
 
-      {/* 🧱 SAME CARDS AS HOMEPAGE */}
       <section className="section-block">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Browse Topics</p>
             <h2>All categories</h2>
           </div>
         </div>
