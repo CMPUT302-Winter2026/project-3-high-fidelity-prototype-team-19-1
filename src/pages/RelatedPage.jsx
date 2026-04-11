@@ -142,7 +142,9 @@ export default function RelatedPage() {
             return (
               <article key={relation.word.id} className="related-list-card">
                 <div>
-
+                  <div className="chip-row compact-chip-row">
+                    <span className="chip chip-soft">{relation.label}</span>
+                  </div>
                   <h3>{relationText.title}</h3>
                   {relationText.form ? <p className="cree-line">{relationText.form}</p> : null}
                   <p className="muted">{relationText.translation}</p>
