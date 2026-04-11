@@ -5,7 +5,7 @@ export const TOPICS = [
     icon: '🐾',
     description: 'Common animal words with related meanings.',
     accent: 'var(--animals)',
-    words: ['atim', 'minos', 'mistatim', 'kinosew', 'acimosis', 'minosis'],
+    words: ['atim', 'minos', 'mistatim', 'kinosew', 'acimosis', 'minosis', 'elephant'],
     semanticGapExamples: [
       {
         query: 'elephant',
@@ -45,6 +45,32 @@ export const TOPICS = [
 ]
 
 export const WORDS = {
+  elephant: {
+    id: 'elephant',
+    cree: 'No direct translation.',
+    syllabics: '',
+    english: 'elephant',
+    topicIds: ['animals'],
+    shortDefinition: 'large grey mammal',
+    description:
+      'This is a semantic-gap example. Some English concepts do not have a direct one-to-one Cree translation, but can still be explored through related words.',
+    example: '',
+    pronunciation: '',
+    audioLabel: '',
+    grammar: {
+      learner: 'Concept (no direct equivalent)',
+      expert: 'Semantic gap example used for exploration',
+    },
+    relations: [
+      { id: 'mistatim', type: 'related', label: 'Similar large animal concept' },
+      { id: 'atim', type: 'topic-neighbour', label: 'Same topic' },
+      { id: 'kinosew', type: 'topic-neighbour', label: 'Same topic' },
+    ],
+    synonyms: [],
+    antonyms: [],
+    forms: [],
+    isSemanticGap: true,
+  },
   atim: {
     id: 'atim',
     cree: 'atim',
@@ -581,7 +607,7 @@ export const HELP_BY_ROUTE = {
     tips: [
       'Tap a node to explore that word.',
       'Use Show more to reveal extra nodes.',
-      'Animals includes an elephant semantic-gap example.',
+      'Words that do not have a translation are shown with a “No translation” label and a dashed circular outline.',
     ],
   },
   categories: {
@@ -672,12 +698,6 @@ export function getAutocompleteSuggestions(query) {
       label: `${topic.label} topic`,
       query: topic.label,
     })),
-    {
-      id: 'gap-elephant',
-      kind: 'word',
-      label: 'elephant · no direct translation',
-      query: 'elephant',
-    },
   ]
 
   return entries
